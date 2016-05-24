@@ -1,0 +1,28 @@
+1.  OpenWeather Weather App (50%)
+	- Build basic weather app according to tutorial
+	  (https://taco.visualstudio.com/en-us/docs/get-started-first-mobile-app/#get-started)
+	- Create the JQM UI 
+	- Add the proper cordova plugins
+	- Added features:		- 
+		- Check for network connectivity before making API call
+		- Splashscreen
+		- Custom App Icons
+
+2. Plugins Api App
+
+    Camera (20%)
+	- Create JQM UI
+	- Add the proper cordova plugins
+	- Capture Photo button will take a picture and return the image to the UI
+	- Get Photo button will load a picture from gallery(libray) to the UI
+	
+	
+    Battery (30%)
+	- Created JQM UI
+	- Addthe proper cordova plugins
+	- Add proper eventlistener (batterystatus)
+	- Show battery level value (ie. 80%)
+	- Show battery level in progress bar
+	- Showsbattery level in color
+	- Showsbattery level in different colors depending on threshold values
+	- Animate the progress bar
