@@ -102,10 +102,75 @@
     }
 
 
-
+    /* Demo 4:  Google Map : 
+     * Google Maps JavaScript API
+     * https://developers.google.com/maps/documentation/javascript/
+     *  -Content-Security-Policy meta tag:  
+     *    http://*.google.com/ 
+     *    https://*.googleapis.com/
+     *                                      
+     *    style-src https://fonts.googleapis.com 
+     *    font-src https://fonts.gstatic.com;
+     */
     $('#getMap').on('click', function (e) {
-        //alert('connection click');
-        //console.log("get map clicked");
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            //console.log('lat: ' + lat);
+            // console.log('lon: ' + lon);
+            var myLatlng = new google.maps.LatLng(lat, lon);
+
+            // Create the Google Maps map and add it to the #mapCanvas container
+            var mapOptions = {
+                zoom: 12,
+                //center: new google.maps.LatLng(lat,lon),
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var mapItem = document.getElementById('googlemap');
+            window.cityMap = new google.maps.Map(mapItem, mapOptions);
+
+            /* custom marker icon */
+            var img = 'images/here.png';
+            var hereMarker = new google.maps.Marker({
+                position: myLatlng,
+                map: window.cityMap,
+                icon: img
+            });
+            /* end custom marker icon */
+
+            /* info window */
+            var info =
+                ('Latitude: ' + pos.coords.latitude + '<br>' +
+                'Longitude: ' + pos.coords.longitude + '<br>' +
+                'Altitude: ' + pos.coords.altitude + '<br>' +
+                'Accuracy: ' + pos.coords.accuracy + '<br>' +
+                'Altitude Accuracy: ' + pos.coords.altitudeAccuracy + '<br>' +
+                'Heading: ' + pos.coords.heading + '<br>' +
+                'Speed: ' + pos.coords.speed + '<br>' +
+                'Timestamp: ' + new Date(pos.timestamp));
+
+            var infoWindow = new google.maps.InfoWindow({
+                position: myLatlng,
+                content: info
+            });
+            google.maps.event.addListener(hereMarker, 'click', function () {
+                infoWindow.open(window.cityMap, hereMarker);
+            });
+            //infoWindow.open(window.cityMap);
+            /* end info window */
+
+        }, function (error) {
+            alert('Geolocation error: ' + error.message);
+            // Create the Google Maps map and add it to the #mapCanvas container
+            var mapOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(46.094305, -64.800907),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var mapItem = document.getElementById('googlemap');
+            window.cityMap = new google.maps.Map(mapItem, mapOptions);
+        }, { timeout: 10000 });
 
 
     });
@@ -129,9 +194,36 @@
         //Get the contacts from the user's device
         navigator.contacts.find(["name", "phoneNumbers", "emails","nickname"],
                   contacts_success, contacts_fail, options);
+        //force ajax spinner to show 
+        setTimeout(function () {
+            $.mobile.loading('show');
+        },1);//1sec timeout
+
     });
 
+    //for sorting
+    var cSort = function (a, b) {
+        //check for undefined
+        var aname = "";
+        var bname = "";
+        aname = a.name.formatted || "unknown contact";
+        bname = b.name.formatted || "unknown contact";
+        //end check undefined
+        var an = aname.toUpperCase();
+        var bn = bname.toUpperCase();
+        //var an = a.name.formatted.toUpperCase();
+        //var bn = b.name.formatted.toUpperCase();
+        return (an < bn) ? -1 : (an == bn) ? 0 : 1;
+    };
+
     function contacts_success(contacts) {
+        //hide the spinner
+        setTimeout(function () {
+            $.mobile.loading('hide');
+        }, 1);
+
+        contacts = contacts.sort(cSort);
+
         //Get the total number of contacts in contacts database
         //console.log(contacts.length);
         $('.total').html(contacts.length + ' contacts found');

@@ -7,9 +7,14 @@ body {
     font-size:12px;
 }
 
-/* mwilliams:  Google map */
+/* mwilliams:  Google map: Demo 3 */
 /* initially hide map and redisplay from jQuery using display: block */
 #map{display:none}
+
+/*google map: demo 4*/
+#gmap {height:100%;overflow:hidden}
+#googlemap{height:92%}/* try 100% */
+
 /* end google map */
 
 /*@keyframes fade {
