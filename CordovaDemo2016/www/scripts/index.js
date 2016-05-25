@@ -296,6 +296,24 @@
         $('#contacts_output').html('<h2>Error getting contacts</h2>');
     }//end of contact fail callback
 
+    /*
+     * Demo 6:  Camera:  Capture Photo
+     * Camera:  cordova-plugin-camera
+     * Take a picture and return image to UI
+     */
+    $("#capturePhoto").on('click', function (e) {
+        //alert('capture photo');
+        //console.log('capture photo');
+    });
 
+    /*
+     * Demo 6:  Camera:  Capture Photo
+     * Camera:  cordova-plugin-camera
+     * Load a picture from gallery (picture library) and display in UI
+     */
+    $("#getPhoto").on('click', function (e) {
+        //alert('get photo');
+        //console.log('get photo');
+    });
 
 } )();

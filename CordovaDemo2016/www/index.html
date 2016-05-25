@@ -5,7 +5,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://*.google.com/ https://*.googleapis.com/ https://*.gstatic.com/ https://ssl.gstatic.com 'unsafe-eval'; style-src https://fonts.googleapis.com 'self' 'unsafe-inline'; media-src *;font-src https://fonts.gstatic.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://*.google.com/ https://*.googleapis.com/ https://*.gstatic.com/ https://ssl.gstatic.com 'unsafe-eval'; style-src https://fonts.googleapis.com 'self' 'unsafe-inline'; media-src *;font-src https://fonts.gstatic.com;">
 
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
@@ -122,7 +122,11 @@
                 <a href="#home" data-icon="home" data-iconpos="notext"
                    class="ui-btn-left">Home</a>
         </header>
-        <section data-role="content"></section>
+        <section data-role="content">
+            <button id="capturePhoto">Capture Photo</button>
+            <button id="getPhoto">Get Photo</button>
+            <img id="largeImage" style="display:none;width:100%" alt="Large Image" />
+        </section>
         <footer data-role="footer" data-position="fixed" data-theme="b">
             <h4>Cordova Demo</h4>
         </footer>
